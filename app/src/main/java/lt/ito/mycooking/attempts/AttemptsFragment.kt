@@ -61,6 +61,6 @@ class AttemptsFragment : BaseFragment(), AttemptsContract, OnItemClickListener<D
 
     override fun onClick(position: Int, item: Dish) {
         findNavController()
-            .navigate(RecipesFragmentDirections.navigateToRecipe(item.recipe))
+            .navigate(AttemptsFragmentDirections.navigateFromAttemptsToRecipe(item.recipe))
     }
 }
