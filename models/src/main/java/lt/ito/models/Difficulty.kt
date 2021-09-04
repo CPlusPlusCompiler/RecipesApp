@@ -16,10 +16,10 @@ enum class Difficulty {
 
 val Difficulty.color: Int
     get() {
-        when (this) {
-            Difficulty.EASY -> return Color.GREEN
-            Difficulty.NORMAL -> return Color.YELLOW
-            Difficulty.HARD -> return Color.RED
-            else -> return Color.BLACK
+        return when (this) {
+            Difficulty.EASY -> Color.parseColor("#2e7d32")     // dark green
+            Difficulty.NORMAL -> Color.parseColor("#fb8c00")   // orange
+            Difficulty.HARD -> Color.parseColor("#bf360c")     // red
+            else -> Color.BLACK
         }
     }
