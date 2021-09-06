@@ -29,7 +29,7 @@ class AttemptsAdapter(
     override fun onBindViewHolder(holder: AttemptHolder, position: Int) {
         val dataItem = dishesList[position]
         holder.imageView.setImageURI(dataItem.recipe.imageUrl)
-        holder.titleView.text = dataItem.recipe.text
+        holder.titleView.text = dataItem.recipe.title
         holder.difficultyView.setText(dataItem.result.stringResId)
         holder.itemView.setOnClickListener { onItemClickListener.onClick(position, dataItem) }
     }
