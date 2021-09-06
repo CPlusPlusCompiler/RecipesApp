@@ -69,22 +69,25 @@ open class RecipeFragment : BaseFragment(), RecipeContract {
         toolbar.setupWithNavController(findNavController())
     }
 
-    protected fun saveAttemptedRecipe() {
-        context?.let {
-            CustomDialog(it, R.style.AlertDialog, R.layout.dialog_rate, object : CustomDialogListener {
+    private fun saveAttemptedRecipe() {
+        context?.let { context ->
+            CustomDialog(context, R.style.AlertDialog, R.layout.dialog_rate, object : CustomDialogListener {
                 override fun onCreate(view: View, dialog: CustomDialog) {
                     view.dialogView.setOnClickListener { dismiss(view, dialog) }
-                    view.containerView.startAnimation(AnimationUtils.loadAnimation(it, R.anim.slide_up))
+                    view.containerView.startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_up))
 
                     val list = CookingResult.values().map { resources.getString(it.stringResId) }
-                    val adapter = ArrayAdapter<String>(it, R.layout.item_attempt_rate, android.R.id.text1, list)
+
+                    val adapter = ArrayAdapter<String>(context, R.layout.item_attempt_rate, android.R.id.text1, list)
+
                     view.actionListView.adapter = adapter
-                    view.actionListView.setOnItemClickListener(object : AdapterView.OnItemClickListener {
-                        override fun onItemClick(p0: AdapterView<*>?, child: View?, position: Int, id: Long) {
-                            recipePresenter.saveAttempt(Dish(System.currentTimeMillis(), args.recipe, CookingResult.PERFECTION))
+
+                    view.actionListView.onItemClickListener =
+                        AdapterView.OnItemClickListener { p0, child, position, id ->
+                            recipePresenter.saveAttempt(
+                                Dish(System.currentTimeMillis(), args.recipe, CookingResult.values()[position] ))
                             dismiss(view, dialog)
                         }
-                    })
                 }
 
                 private fun dismiss(view: View, dialog: CustomDialog) {
