@@ -1,6 +1,6 @@
 package lt.ito.components.recipe
 
-import lt.ito.components.base.BasePresenter
+import lt.ito.components.base.BaseRecipePresenter
 import lt.ito.components.respositories.DishesRepository
 import lt.ito.components.respositories.RecipesRepository
 import lt.ito.components.schedulers.SchedulerProvider
@@ -14,9 +14,9 @@ class RecipePresenter @Inject constructor(
     private val recipesRepository: RecipesRepository,
     private val dishesRepository: DishesRepository,
     private val schedulerProvider: SchedulerProvider
-) : BasePresenter<RecipeContract>() {
+) : BaseRecipePresenter()  {
 
-    fun load(recipe: Recipe) {
+    override fun load(recipe: Recipe) {
         subscriptions.add(
             recipesRepository.getRecipe(recipe)
                 .subscribeOn(schedulerProvider.io())
@@ -29,7 +29,7 @@ class RecipePresenter @Inject constructor(
         )
     }
 
-    fun saveAttempt(dish: Dish) {
+    override fun saveAttempt(dish: Dish) {
         subscriptions.add(
             dishesRepository.add(dish)
                 .subscribe({}, { view?.showError(it) })

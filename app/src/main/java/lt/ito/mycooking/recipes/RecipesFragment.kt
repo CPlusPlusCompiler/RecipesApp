@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import it.ito.mycooking.R
+import kotlinx.android.synthetic.main.controller_recipes.*
 import kotlinx.android.synthetic.main.controller_recipes.view.*
 import lt.ito.components.base.OnItemClickListener
 import lt.ito.components.recipes.RecipesContract
@@ -37,6 +38,10 @@ class RecipesFragment : BaseFragment(), RecipesContract, OnItemClickListener<Rec
         view.recyclerView.adapter = adapter
         view.recyclerView.layoutManager = llm
         view.recyclerView.addItemDecoration(dividerItemDecoration)
+
+        view.btnRecommendation.setOnClickListener {
+            recipesPresenter.onLoadRecommendation()
+        }
     }
 
     override fun onStart() {
@@ -54,9 +59,17 @@ class RecipesFragment : BaseFragment(), RecipesContract, OnItemClickListener<Rec
         adapter.setValues(recipes)
     }
 
+    override fun showRecommendation(recipe: Recipe) {
+        navigateToRecipe(recipe)
+    }
+
     override fun onClick(position: Int, item: Recipe) {
+        navigateToRecipe(item)
+    }
+
+    private fun navigateToRecipe(recipe: Recipe) {
         findNavController()
-            .navigate(RecipesFragmentDirections.navigateToRecipe(item))
+            .navigate(RecipesFragmentDirections.navigateToRecipe(recipe))
     }
 
 }

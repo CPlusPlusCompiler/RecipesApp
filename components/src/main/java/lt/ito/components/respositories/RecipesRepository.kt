@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken
 import io.reactivex.Single
 import lt.ito.AppFileUtils
 import lt.ito.components.R
+import lt.ito.models.Difficulty
 import lt.ito.models.Recipe
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -19,6 +20,15 @@ class RecipesRepository @Inject constructor(
                 appFileUtils.getRawText(R.raw.recipes) ?: "",
                 object : TypeToken<List<Recipe>>() {}.type
             )
+        )
+    }
+
+    fun getRecipesByDifficulty(difficulty: Difficulty): Single<List<Recipe>> {
+        return Single.just(
+            gson.fromJson<List<Recipe>>(
+                appFileUtils.getRawText(R.raw.recipes) ?: "",
+                object : TypeToken<List<Recipe>>() {}.type
+            ).filter { it.difficulty == difficulty}
         )
     }
 

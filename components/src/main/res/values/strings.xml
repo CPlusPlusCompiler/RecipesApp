@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">components</string>
+    <string name="error_no_recommendations">There is no recipes to recommend!</string>
 </resources>
