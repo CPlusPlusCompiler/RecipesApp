@@ -6,4 +6,6 @@ import lt.ito.models.Recipe
 interface RecipesContract : BaseScreenContract {
 
     fun updateDataList(recipes: List<Recipe>)
+
+    fun showRecommendation(recipe: Recipe)
 }

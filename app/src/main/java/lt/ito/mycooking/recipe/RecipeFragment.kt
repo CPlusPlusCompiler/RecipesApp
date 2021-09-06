@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import it.ito.mycooking.R
 import kotlinx.android.synthetic.main.controller_recipe.*
 import kotlinx.android.synthetic.main.dialog_rate.view.*
+import lt.ito.components.base.BaseRecipePresenter
 import lt.ito.components.recipe.RecipeContract
 import lt.ito.components.recipe.RecipePresenter
 import lt.ito.models.CookingResult
@@ -29,9 +30,10 @@ import lt.ito.mycooking.utils.stringResId
 import javax.inject.Inject
 
 
-class RecipeFragment : BaseFragment(), RecipeContract {
+open class RecipeFragment : BaseFragment(), RecipeContract {
 
-    @Inject lateinit var recipePresenter: RecipePresenter
+    @Inject
+    lateinit var recipePresenter: RecipePresenter
 
     val args by navArgs<RecipeFragmentArgs>()
 
@@ -67,7 +69,7 @@ class RecipeFragment : BaseFragment(), RecipeContract {
         toolbar.setupWithNavController(findNavController())
     }
 
-    private fun saveAttemptedRecipe() {
+    protected fun saveAttemptedRecipe() {
         context?.let {
             CustomDialog(it, R.style.AlertDialog, R.layout.dialog_rate, object : CustomDialogListener {
                 override fun onCreate(view: View, dialog: CustomDialog) {

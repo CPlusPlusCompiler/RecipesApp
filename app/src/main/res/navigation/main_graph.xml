@@ -31,4 +31,9 @@
             android:id="@+id/navigate_from_attempts_to_recipe"
             app:destination="@id/recipeController" />
     </fragment>
+    <fragment
+        android:id="@+id/recommendationController"
+        android:name="lt.ito.mycooking.recommendation.RecommendationController"
+        android:label="RecommendationController" />
+
 </navigation>
