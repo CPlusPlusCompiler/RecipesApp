@@ -4,6 +4,9 @@ In this exercise applicant should implement a new feature into an existing sampl
 
 App uses older type of architecture. If you feel more comfortable, you can use MVVM instead of MVP.
 
+## Conclusion
+I decided to keep the project structure as-is because I thought it would be a good excercise to use MVP and RxJava. 
+The code might be not the best because I am not used to MVP. However, I have a [neat project written in MMVM](https://github.com/CPlusPlusCompiler/SampleAPIReader), that uses modern libraries and practises.
 
 ## Point of exercise
 
